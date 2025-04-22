@@ -1,11 +1,17 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
-
+import { RegisterForm } from "@/components/forms/RegisterForm";
 import { getPatient, getUser } from "@/lib/actions/patient.actions";
+
+// import * as Sentry from '@sentry/nextjs'
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId);
   const patient = await getPatient(userId);
+
+  //to track register page views
+  // Sentry.setTag("page", "register");
+  // Sentry.setTag("user_name", user.name);
 
   if (patient) redirect(`/patients/${userId}/new-appointment`);
 
@@ -17,10 +23,11 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
             src="/assets/icons/logo-full.svg"
             height={1000}
             width={1000}
-            alt="patient"
+            alt="logo"
             className="mb-12 h-10 w-fit"
           />
 
+          <RegisterForm user={user} />
 
           <p className="copyright py-12">© 2025 Synexa</p>
         </div>

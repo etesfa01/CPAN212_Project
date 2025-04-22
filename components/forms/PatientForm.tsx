@@ -38,8 +38,9 @@ export const PatientForm = () => {
       };
 
       const user = await createUser(userData);
+      
       if (user) {
-        router.push(`/patients/${user.$id}/register/page`);
+        router.push(`/patients/${user.$id}/register`);
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +54,7 @@ export const PatientForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
         <section className="mb-12 space-y-4">
           <h1 className="header">Hi there 👋</h1>
-          <p className="text-dark-700">Get started with appointments.</p>
+          <p className="text-gray-700">Get started with appointments.</p>
         </section>
 
         <CustomFormField

@@ -13,7 +13,7 @@ import {
 } from "../appwrite.config";
 import { formatDateTime, parseStringify } from "../utils";
 
-//  CREATE APPOINTMENT
+//  Create appointment
 export const createAppointment = async (
   appointment: CreateAppointmentParams
 ) => {
@@ -32,12 +32,13 @@ export const createAppointment = async (
   }
 };
 
-//  GET RECENT APPOINTMENTS
+//  Get recent appointments
 export const getRecentAppointmentList = async () => {
   try {
     const appointments = await databases.listDocuments(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
+      //order descending
       [Query.orderDesc("$createdAt")]
     );
 
@@ -68,6 +69,7 @@ export const getRecentAppointmentList = async () => {
     };
 
     const counts = (appointments.documents as Appointment[]).reduce(
+      //accumulator, and then the initial counts
       (acc, appointment) => {
         switch (appointment.status) {
           case "scheduled":
@@ -116,7 +118,7 @@ export const sendSMSNotification = async (userId: string, content: string) => {
   }
 };
 
-//  UPDATE APPOINTMENT
+//  update the APPOINTMENT
 export const updateAppointment = async ({
   appointmentId,
   userId,
@@ -135,7 +137,7 @@ export const updateAppointment = async ({
 
     if (!updatedAppointment) throw Error;
 
-    const smsMessage = `Greetings from CarePulse. ${type === "schedule" ? `Your appointment is confirmed for ${formatDateTime(appointment.schedule!, timeZone).dateTime} with Dr. ${appointment.primaryPhysician}` : `We regret to inform that your appointment for ${formatDateTime(appointment.schedule!, timeZone).dateTime} is cancelled. Reason:  ${appointment.cancellationReason}`}.`;
+    const smsMessage = `Greetings from Synexa. ${type === "schedule" ? `Your appointment is confirmed for ${formatDateTime(appointment.schedule!, timeZone).dateTime} with Dr. ${appointment.primaryPhysician}` : `We regret to inform that your appointment for ${formatDateTime(appointment.schedule!, timeZone).dateTime} is cancelled. Reason:  ${appointment.cancellationReason}`}.`;
     await sendSMSNotification(userId, smsMessage);
 
     revalidatePath("/admin");
@@ -145,7 +147,7 @@ export const updateAppointment = async ({
   }
 };
 
-// GET APPOINTMENT
+// get the APPOINTMENT
 export const getAppointment = async (appointmentId: string) => {
   try {
     const appointment = await databases.getDocument(

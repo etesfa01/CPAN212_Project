@@ -6,7 +6,7 @@
   </g>
   
   <!-- Text -->
-  <text x="110" y="65" font-family="Arial, sans-serif" font-size="36" fill="#333" font-weight="bold">Synexa</text>
+  <text x="110" y="78" font-family="Arial, sans-serif" font-size="36" fill="#fff" font-weight="bold">Synexa</text>
   
   <!-- Gradient Definition -->
   <defs>
