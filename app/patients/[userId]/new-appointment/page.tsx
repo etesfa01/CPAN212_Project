@@ -22,7 +22,7 @@ export default async function NewAppointment({
           <AppointmentForm 
             type="create" 
             userId={userId} 
-            patientId={patient?.$id}
+            patientId={patient.$id}
           />
 
           <p className="copyright mt-10 py-12">

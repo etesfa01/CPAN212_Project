@@ -1,6 +1,5 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { cn } from '@nextui-org/react';
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
